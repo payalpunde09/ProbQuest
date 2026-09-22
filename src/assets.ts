@@ -22,10 +22,10 @@ function stockAssetUrl(assetId: string, fileName: string): string {
 }
 
 export default defineAssets({
-  'environment-desk': {
-    url: stockAssetUrl('environment-desk', 'environmentDesk.gltf'),
+  'environment-world': {
+    url: publicAssetUrl('gltf/environment/environment.glb'),
     type: AssetType.GLTF,
-    name: 'Environment Desk',
+    name: 'ProbQuest Environment',
     priority: 'lazy',
   },
   'plant-sansevieria': {

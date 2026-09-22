@@ -1,16 +1,96 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="icon" href="data:," />
-    <title>probquest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Math Quest XR - Probability Adventure. Futuristic hand-attached XR game interface and room navigation in WebXR." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>" />
+    <title>Math Quest XR – Probability Adventure</title>
+    <link rel="stylesheet" href="/styles/ui.css" />
   </head>
-  <body style="margin: 0">
+  <body>
+    <!-- 3D WebGL Canvas Container -->
     <div id="scene-container"></div>
-    <script type="module" src="/src/index.ts"></script>
+
+    <!-- Smooth Screen Fade Transition Overlay -->
+    <div id="fade-overlay"></div>
+
+    <!-- Desktop HUD & Interactive Controls Overlay -->
+    <div id="desktop-hud">
+      <div id="crosshair"></div>
+
+      <!-- Quick Room Navigation & Menu Bar -->
+      <header id="desktop-nav-bar">
+        <div class="nav-brand">
+          <span class="nav-brand-icon">🎲</span>
+          <span class="nav-brand-title">MATH QUEST XR</span>
+          <span id="current-room-badge" class="nav-room-badge">LEARNING HUB</span>
+        </div>
+        <nav class="nav-buttons" aria-label="Game navigation">
+          <button id="nav-btn-home" class="nav-btn" title="Return to Learning Hub">🏛️ HOME</button>
+          <button id="nav-btn-rooms" class="nav-btn nav-btn-primary" title="Select Room">🌌 ROOMS ▾</button>
+          <button id="nav-btn-inventory" class="nav-btn" title="View Inventory">🎒 INVENTORY</button>
+          <button id="nav-btn-settings" class="nav-btn" title="Game Settings">⚙️ SETTINGS</button>
+          <button id="nav-btn-prob" class="nav-btn" title="Probability Guide">📊 FORMULAS</button>
+          <button id="nav-btn-exit" class="nav-btn nav-btn-exit" title="Exit to Start Screen">🚪 EXIT</button>
+        </nav>
+      </header>
+
+      <!-- Quick Rooms Dropdown / Drawer for Instant Click Navigation -->
+      <div id="desktop-rooms-drawer" class="rooms-drawer hidden">
+        <div class="drawer-header">PROBABILITY ADVENTURE ROOMS — CLICK TO TELEPORT:</div>
+        <div class="drawer-grid">
+          <button class="room-chip active" data-room="Learning Hub">🏛️ Learning Hub</button>
+          <button class="room-chip" data-room="Coin Castle">🪙 Coin Castle</button>
+          <button class="room-chip" data-room="Dice Dungeon">🎲 Dice Dungeon</button>
+          <button class="room-chip" data-room="Mystery Box">📦 Mystery Box</button>
+          <button class="room-chip" data-room="Card Room">🃏 Card Room</button>
+          <button class="room-chip" data-room="Challenge Zone">⚡ Challenge Zone</button>
+          <button class="room-chip" data-room="Final Probability Gate">⛩️ Final Gate</button>
+          <button class="room-chip" data-room="Victory Room">🏆 Victory Room</button>
+        </div>
+      </div>
+
+      <div class="hud-hint-badge">
+        <span>🖱️ <b>Click</b> any button to navigate</span>
+        <span>•</span>
+        <span><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> Move</span>
+        <span>•</span>
+        <span>Drag to Look</span>
+        <span>•</span>
+        <span><kbd>ESC</kbd> Close Menu</span>
+      </div>
+    </div>
+
+    <!-- WebXR & Desktop Start Screen -->
+    <div id="start-screen">
+      <div class="portal-glow"></div>
+      <div class="menu-card">
+        <div class="menu-header">
+          <div class="badge-tag">WebXR Probability Game</div>
+          <h1 class="title-glow">MATH QUEST XR</h1>
+          <div class="subtitle-glow">PROBABILITY ADVENTURE</div>
+        </div>
+
+        <div class="button-container">
+          <button id="btn-enter-vr" class="btn-cyber" aria-label="Enter Immersive Virtual Reality">
+            <span class="btn-icon">🥽</span>
+            <span>ENTER VR</span>
+          </button>
+          <button id="btn-desktop-mode" class="btn-cyber btn-cyber-secondary" aria-label="Start Desktop 3D Experience">
+            <span class="btn-icon">🖥️</span>
+            <span>DESKTOP MODE</span>
+          </button>
+        </div>
+
+        <div class="status-badge">
+          <div class="status-dot"></div>
+          <span>Untouched GLB Environment Loaded & Ready</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Game Orchestrator -->
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
